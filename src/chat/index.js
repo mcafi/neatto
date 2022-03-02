@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import List from "./List"
 import Message from "./Message"
+import Messages from "./Messges"
 import Name from "./Name"
 
 export default function Chat() {
@@ -9,7 +10,7 @@ export default function Chat() {
             <h1 className="font-bold">Neatto</h1>
             <div className="flex">
                 <div>
-                    <div className="bg-white h-96 w-96"></div>
+                    <Messages />
                     <Name />
                     <Message />
                 </div>
