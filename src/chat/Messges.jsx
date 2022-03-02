@@ -4,10 +4,24 @@ import { useCollectionData } from "react-firebase-hooks/firestore";
 import MessageItem from "./MessageItem";
 import { useEffect, useRef } from "react";
 
-export default function Messages() {
+const messageConverter = {
+  toFirestore(m) {
+    return {author: m.autor, message: m.message}
+  },
+  fromFirestore(snapshot, options) {
+    const data = snapshot.data(options)
+    return {
+      author: data.author,
+      message: data.message,
+      id: snapshot.id
+    }
+  }
+}
 
-  const messagesRef = collection(firestore, "messages");
-  const q = query(messagesRef, orderBy("sent"), limit(25));
+const messagesRef = collection(firestore, "messages").withConverter(messageConverter);
+const q = query(messagesRef, orderBy("sent"), limit(25));
+
+export default function Messages() {
 
   const [messages] = useCollectionData(q);
 
@@ -23,7 +37,7 @@ export default function Messages() {
         {messages &&
           messages.map((msg) => (
             <MessageItem
-              key={msg.sent}
+              key={msg.id}
               author={msg.author}
               message={msg.message}
             />
