@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 export default function MessageInput() {
   const [message, setmessage] = useState("");
-  const author = useSelector(state => state)
+  const author = useSelector(state => state.name)
 
   const messagesRef = collection(firestore, "messages");
 

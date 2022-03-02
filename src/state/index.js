@@ -1,12 +1,13 @@
 import { createStore } from "redux";
 
-function name(state = "", action) {
+function user(state, action) {
   switch (action.type) {
     case "CHANGE_NAME":
-      return action.payload;
+      state.name = action.payload;
+      return {...state}
     default:
       return state;
   }
 }
 
-export const store = createStore(name, "senza nome");
+export const store = createStore(user, {name: "", online: true});

@@ -18,7 +18,7 @@ export default function Messages() {
   }, [messages])
 
   return (
-    <div className="bg-white h-96 w-96 overflow-auto">
+    <div className="bg-white h-96 w-full overflow-auto">
       <ul>
         {messages &&
           messages.map((msg) => (

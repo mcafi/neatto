@@ -5,10 +5,10 @@ import Name from "./Name"
 
 export default function Chat() {
     return (
-        <div className="p-2 border-black border bg-cyan-300">
+        <div className="w-full p-2 border-black border bg-cyan-300">
             <h1 className="font-bold">Neatto</h1>
             <div className="flex">
-                <div>
+                <div className="flex-fill w-full">
                     <Messages />
                     <Name />
                     <MessageInput />
