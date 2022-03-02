@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react"
 import List from "./List"
-import Message from "./Message"
+import MessageInput from "./MessageInput"
 import Messages from "./Messges"
 import Name from "./Name"
 
@@ -12,7 +11,7 @@ export default function Chat() {
                 <div>
                     <Messages />
                     <Name />
-                    <Message />
+                    <MessageInput />
                 </div>
                 <List />
             </div>

@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { firestore } from "../firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { useSelector } from "react-redux";
 
-export default function Message() {
+export default function MessageInput() {
   const [message, setmessage] = useState("");
+  const author = useSelector(state => state)
 
   const messagesRef = collection(firestore, "messages");
 
   const handleKeyDown = async (e) => {
     if (e.key === "Enter" && message) {
       await addDoc(messagesRef, {
-          author: "cafi",
+          author,
           message,
           sent: serverTimestamp()
       })
@@ -19,8 +21,9 @@ export default function Message() {
   };
 
   return (
-    <input
-      className="p-1 w-100"
+    <textarea
+      className="p-1 w-full"
+      rows="2"
       value={message}
       onChange={(e) => setmessage(e.target.value)}
       onKeyDown={handleKeyDown}
