@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, setDoc, updateDoc } from "firebase/firestore";
+import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { firestore } from "../firebase";
