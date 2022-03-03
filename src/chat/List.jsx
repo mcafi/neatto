@@ -29,7 +29,7 @@ export default function List() {
   return (
     <div className="ml-2 p-2 bg-white h-100 w-48">
       <ul>
-        <li className="font-bold">{user.name}</li>
+        <li className="font-bold border-black border-b-2">{user.name}</li>
         {users &&
           users.map(
             (u) => u.id !== user.userId && <li key={u.id}>{u.name}</li>

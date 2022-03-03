@@ -1,6 +1,6 @@
 import List from "./List";
 import MessageInput from "./MessageInput";
-import Messages from "./Messges";
+import Messages from "./Messages";
 import Name from "./Name";
 
 export default function Chat() {

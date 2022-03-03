@@ -1,27 +1,32 @@
 import { firestore } from "../firebase";
-import { collection, limit, orderBy, query } from "firebase/firestore";
+import { collection, orderBy, query } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import MessageItem from "./MessageItem";
-import { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
+import { ChatIdContext } from "../App";
 
 const messageConverter = {
   toFirestore(m) {
-    return {author: m.autor, message: m.message}
+    return {author: m.autor, message: m.message, chatId: m.chatId}
   },
   fromFirestore(snapshot, options) {
     const data = snapshot.data(options)
     return {
       author: data.author,
       message: data.message,
+      chatId: data.chatId,
       id: snapshot.id
     }
   }
 }
 
-const messagesRef = collection(firestore, "messages").withConverter(messageConverter);
-const q = query(messagesRef, orderBy("sent"), limit(25));
 
 export default function Messages() {
+
+  const chatId = useContext(ChatIdContext)
+
+  const messagesRef = collection(firestore, "chats", chatId, "messages").withConverter(messageConverter);
+  const q = query(messagesRef, orderBy("sent"));
 
   const [messages] = useCollectionData(q);
 
