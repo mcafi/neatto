@@ -1,5 +1,5 @@
 import { firestore } from "../firebase";
-import { collection, orderBy, query } from "firebase/firestore";
+import { collection, orderBy, query, limit } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import MessageItem from "./MessageItem";
 import { useContext, useEffect, useRef } from "react";
@@ -26,7 +26,7 @@ export default function Messages() {
   const chatId = useContext(ChatIdContext)
 
   const messagesRef = collection(firestore, "chats", chatId, "messages").withConverter(messageConverter);
-  const q = query(messagesRef, orderBy("sent"));
+  const q = query(messagesRef, orderBy("sent"), limit(20));
 
   const [messages] = useCollectionData(q);
 
