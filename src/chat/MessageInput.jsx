@@ -7,19 +7,30 @@ import { ChatIdContext } from "../App";
 export default function MessageInput() {
   const [message, setmessage] = useState("");
 
-  const author = useSelector(state => state.name)
-  const chatId = useContext(ChatIdContext)
+  const user = useSelector((state) => state.user);
 
-  const messagesRef = collection(firestore, "chats", chatId, "messages")
+  const chatId = useContext(ChatIdContext);
+
+  const activeChat = useSelector((state) => state.privateChat.current);
+
+  const messagesRef = collection(firestore, "chats", chatId, "messages");
 
   const handleKeyDown = async (e) => {
+  
     if (e.key === "Enter" && message) {
+      e.preventDefault();
       setmessage("");
+      let privateMessage = null;
+      if (activeChat) {
+        privateMessage = [user.userId, activeChat].sort()
+      }
       await addDoc(messagesRef, {
-          author,
-          message,
-          sent: serverTimestamp()
-      })
+        author: user.name,
+        message,
+        sent: serverTimestamp(),
+        privateMessage,
+      });
+
     }
   };
 
