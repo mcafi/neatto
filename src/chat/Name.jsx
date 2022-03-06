@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { firestore } from "../firebase";
 
 export default function Name() {
-  const name = useSelector(state => state.name);
-  const userId = useSelector(state => state.userId)
+  const name = useSelector(state => state.user.name);
+  const userId = useSelector(state => state.user.userId)
   const [tempName, setTempName] = useState(name);
 
   const dispatch = useDispatch();

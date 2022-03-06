@@ -7,14 +7,13 @@ import { ChatIdContext } from "../App";
 
 const messageConverter = {
   toFirestore(m) {
-    return { author: m.autor, message: m.message, chatId: m.chatId };
+    return { author: m.autor, message: m.message };
   },
   fromFirestore(snapshot, options) {
     const data = snapshot.data(options);
     return {
       author: data.author,
       message: data.message,
-      chatId: data.chatId,
       id: snapshot.id,
     };
   },

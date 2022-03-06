@@ -5,23 +5,23 @@ import Chat from "./chat";
 import { firestore } from "./firebase";
 import NameSelector from "./NameSelector";
 
-export const ChatIdContext = createContext()
+export const ChatIdContext = createContext();
 
-const chatRef = collection(firestore, "chats")
+const chatRef = collection(firestore, "chats");
 
 function App() {
-  const id = new URLSearchParams(window.location.search).get('id')
+  const id = new URLSearchParams(window.location.search).get("id");
 
   const initChat = async () => {
-    const docRef = await addDoc(chatRef, {messages: []})
-    window.location.href = `?id=${docRef.id}`
-  }
+    const docRef = await addDoc(chatRef, { messages: [] });
+    window.location.href = `?id=${docRef.id}`;
+  };
 
   if (!id) {
-    initChat()
+    initChat();
   }
 
-  const name = useSelector(state => state.name)
+  const name = useSelector((state) => state.user.name);
 
   return (
     <div className="h-screen container mx-auto flex items-center justify-center">
